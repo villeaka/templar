@@ -43,5 +43,6 @@
       "npx prettier src --write",
       "npx eslint src --fix --max-warnings=0"
     ]
-  }
+  },
+  "packageManager": "pnpm@7.27.1"
 }

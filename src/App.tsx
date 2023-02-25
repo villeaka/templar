@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import Authentication from "./components/Authentication";
+import Editor from "./components/Editor/Editor";
 import LogoutButton from "./components/LogoutButton";
 import { AuthContext } from "./context/auth";
 import { getStoredAccessToken, resetStoredAccessToken, setStoredAccessToken } from "./utils/auth";
@@ -25,6 +26,7 @@ function App() {
   return (
     <AuthContext.Provider value={{ accessToken }}>
       <LogoutButton onLogout={handleLogout} />
+      <Editor />
     </AuthContext.Provider>
   );
 }

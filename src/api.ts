@@ -1,4 +1,5 @@
 import { AccessTokenResponseT } from "./types/auth";
+import { ListFolderResponseT } from "./types/file";
 import axios from "axios";
 
 export const fetchAuthToken = (
@@ -19,3 +20,25 @@ export const fetchAuthToken = (
     })
     .then((res) => res.data);
 };
+
+export const listFolders = (): Promise<ListFolderResponseT> =>
+  axios
+    .post(
+      "https://api.dropboxapi.com/2/files/list_folder",
+      { path: "", recursive: false },
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
+      }
+    )
+    .then((res) => res.data);
+
+export const downloadFile = (fileId: string): Promise<Blob> =>
+  axios
+    .post("https://content.dropboxapi.com/2/files/download", undefined, {
+      responseType: "blob",
+      headers: {
+        "Dropbox-API-Arg": JSON.stringify({ path: fileId }),
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+    .then((res) => res.data);
